@@ -42,6 +42,36 @@
 
 	};
 
+    var burgerMenu = function () {
+        // Listen for click on the hamburger icon
+        $('body').on('click', '.hamburger', function (event) {
+            var $this = $(this);
+    
+            // Toggle the 'offcanvas' class for the body
+            if ($('body').hasClass('offcanvas')) {
+                $('body').removeClass('offcanvas');
+            } else {
+                $('body').addClass('offcanvas');
+            }
+    
+            // Toggle the active state for the hamburger
+            $this.toggleClass('active');
+            event.preventDefault();
+        });
+    
+        // Close menu on clicking outside the navigation
+        $(document).on('click', function (e) {
+            var container = $("#fh5co-offcanvas, .hamburger");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                if ($('body').hasClass('offcanvas')) {
+                    $('body').removeClass('offcanvas');
+                    $('.hamburger').removeClass('active');
+                }
+            }
+        });
+    };
+    
+
 
 	var offcanvasMenu = function () {
 
@@ -306,8 +336,7 @@
 
 	$(function () {
 		mobileMenuOutsideClick();
-
-		burgerMenu();
+        burgerMenu();
 		contentWayPoint();
 		dropdown();
 		goToTop();
